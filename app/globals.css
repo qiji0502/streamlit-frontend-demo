@@ -1,0 +1,169 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /*
+   * Color Psychology:
+   * - Teal-blue (#4a9aba): Trust, clarity, intelligence - calms cognitive load for tool use
+   * - Soft lavender (#9b8ec4): Creativity, wisdom - signals AI capability without intimidation
+   * - Warm sand (#e8dcc8): Safety, warmth - grounds the cool tones, reduces screen fatigue
+   * - High-contrast foreground on warm neutral background - optimal readability
+   */
+  --background: #faf8f5;
+  --foreground: #2c2a35;
+  --card: #ffffff;
+  --card-foreground: #2c2a35;
+  --popover: #ffffff;
+  --popover-foreground: #2c2a35;
+  --primary: #4a9aba;
+  --primary-foreground: #ffffff;
+  --secondary: #f2eef8;
+  --secondary-foreground: #2c2a35;
+  --muted: #f4f2ed;
+  --muted-foreground: #8a8793;
+  --accent: #ede8f4;
+  --accent-foreground: #2c2a35;
+  --destructive: #d9534f;
+  --destructive-foreground: #ffffff;
+  --border: #e2ded6;
+  --input: #e2ded6;
+  --ring: #4a9aba;
+  --chart-1: #4a9aba;
+  --chart-2: #9b8ec4;
+  --chart-3: #d4b96a;
+  --chart-4: #6db5a0;
+  --chart-5: #c4848e;
+  --radius: 0.75rem;
+  --sidebar: #f7f5f2;
+  --sidebar-foreground: #2c2a35;
+  --sidebar-primary: #4a9aba;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ede8f4;
+  --sidebar-accent-foreground: #2c2a35;
+  --sidebar-border: #e2ded6;
+  --sidebar-ring: #4a9aba;
+
+  /* Custom tokens */
+  --color-blue-soft: #dbedf5;
+  --color-purple-soft: #ece5f5;
+  --color-beige-soft: #f5efe3;
+  --color-blue-muted: #a3cee0;
+  --color-purple-muted: #bdb2d4;
+  --color-warm-bg: #faf8f5;
+}
+
+@theme inline {
+  --font-sans: 'Noto Sans SC', 'Geist', 'Geist Fallback', sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-blue-soft: var(--color-blue-soft);
+  --color-purple-soft: var(--color-purple-soft);
+  --color-beige-soft: var(--color-beige-soft);
+  --color-blue-muted: var(--color-blue-muted);
+  --color-purple-muted: var(--color-purple-muted);
+  --color-warm-bg: var(--color-warm-bg);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-blue-muted);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Chat message animation */
+@keyframes message-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-message-in {
+  animation: message-in 0.3s ease-out;
+}
+
+/* Upload zone pulse */
+@keyframes upload-pulse {
+  0%, 100% {
+    border-color: var(--primary);
+    background-color: rgba(74, 154, 186, 0.05);
+  }
+  50% {
+    border-color: var(--color-purple-muted);
+    background-color: rgba(155, 142, 196, 0.08);
+  }
+}
+
+.upload-zone-active {
+  animation: upload-pulse 1.5s ease-in-out infinite;
+}
+
+/* Typing indicator dots */
+@keyframes typing-dot {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-4px); }
+}
+
+.typing-dot:nth-child(1) { animation: typing-dot 1.4s infinite 0s; }
+.typing-dot:nth-child(2) { animation: typing-dot 1.4s infinite 0.2s; }
+.typing-dot:nth-child(3) { animation: typing-dot 1.4s infinite 0.4s; }
